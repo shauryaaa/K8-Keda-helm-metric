@@ -2,6 +2,8 @@
 
 ### My Progress on the Kubernetes Automation Assignment
 
+---
+
 My assignment was to develop an API or CLI script to automate Kubernetes cluster operations, including KEDA installation, event-driven scaling, and health status reporting, all within a modular and well-documented framework.
 
 Here's a breakdown of what I've achieved and what remains for future enhancement:
