@@ -1,0 +1,128 @@
+
+INFO - Installing Helm chart 'C:\Users\shaurya\k8s_automation_script\charts\my-
+app-chart' as release 'my-new-helm-app' in namespace 'default'...
+2025-06-29 18:47:42,607 - INFO - Helm release 'my-new-helm-app' installed successfully.
+2025-06-29 18:47:42,607 - INFO - Helm stdout:
+NAME: my-new-helm-app
+LAST DEPLOYED: Sun Jun 29 18:47:38 2025
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+NOTES:
+1. Get the application URL by running these commands:
+  export POD_NAME=$(kubectl get pods --namespace default -l "app.kubernetes.io/name=my-app-chart,app.kube
+rnetes.io/instance=my-new-helm-app" -o jsonpath="{.items[0].metadata.name}")
+  export CONTAINER_PORT=$(kubectl get pod --namespace default $POD_NAME -o jsonpath="{.spec.containers[0]
+.ports[0].containerPort}")
+  echo "Visit http://127.0.0.1:8080 to use your application"
+  kubectl --namespace default port-forward $POD_NAME 8080:$CONTAINER_PORT
+
+2025-06-29 18:47:47,630 - INFO - 
+--- Deployment 'my-new-helm-app-my-app-chart' Details (via Helm Release 'my-new-helm-app') ---
+2025-06-29 18:47:47,631 - INFO - Image: nginx:latest
+2025-06-29 18:47:47,631 - INFO - Namespace: default
+2025-06-29 18:47:47,631 - INFO - Replicas: 1
+2025-06-29 18:47:47,632 - INFO - Available Replicas: 1
+2025-06-29 18:47:47,632 - INFO - Endpoints: Internal Container Port: 80
+2025-06-29 18:47:47,632 - INFO -
+--- Scaling Configuration ---
+2025-06-29 18:47:47,633 - INFO - Min Replicas: 1
+2025-06-29 18:47:47,633 - INFO - Max Replicas: 10
+2025-06-29 18:47:47,633 - INFO - Scaling Metric Type: cpu
+2025-06-29 18:47:47,633 - INFO - Scaling Metric Value: 50
+2025-06-29 18:47:47,633 - INFO - Event Source Configuration: {}
+
+2025-06-29 18:47:47,634 - INFO - ------------------------------------------
+
+
+Deployment created successfully with the following details:
+deployment_name_in_k8s: my-new-helm-app-my-app-chart
+endpoints:
+- 'Internal Container Port: 80'
+helm_release_name: my-new-helm-app
+image: nginx:latest
+namespace: default
+scaling_config:
+  event_source: {}
+  max_replicas: 10
+  metric_type: cpu
+  metric_value: '50'
+  min_replicas: 1
+
+
+
+
+
+  PS C:\Users\shaurya\k8s_automation_script> kubectl get scaledobject my-new-helm-app-my-app-chart-scaledob
+ject -n default
+NAME                                        SCALETARGETKIND      SCALETARGETNAME                MIN   MAX
+   READY   ACTIVE    FALLBACK   PAUSED    TRIGGERS   AUTHENTICATIONS   AGE
+my-new-helm-app-my-app-chart-scaledobject   apps/v1.Deployment   my-new-helm-app-my-app-chart   1     10 
+   False   Unknown   False      Unknown   cpu                          4m23s
+
+
+
+
+   PS C:\Users\shaurya\k8s_automation_script> kubectl top nodes
+NAME             CPU(cores)   CPU(%)   MEMORY(bytes)   MEMORY(%)
+docker-desktop   232m         2%       2057Mi          26%
+PS C:\Users\shaurya\k8s_automation_script> kubectl top pods -n default
+NAME                                            CPU(cores)   MEMORY(bytes)   
+my-new-helm-app-my-app-chart-7b7654679b-l2jcx   0m           7Mi
+my-nginx-app-7cf78547db-shww2                   0m           7Mi
+PS C:\Users\shaurya\k8s_automation_script>
+
+
+
+
+INFO - Installing Helm chart 'C:\Users\shaurya\k8s_automation_script\charts\my-
+app-chart' as release 'my-new-helm-app' in namespace 'default'...
+2025-06-29 18:47:42,607 - INFO - Helm release 'my-new-helm-app' installed successfully.
+2025-06-29 18:47:42,607 - INFO - Helm stdout:
+NAME: my-new-helm-app
+LAST DEPLOYED: Sun Jun 29 18:47:38 2025
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+NOTES:
+1. Get the application URL by running these commands:
+  export POD_NAME=$(kubectl get pods --namespace default -l "app.kubernetes.io/name=my-app-chart,app.kube
+rnetes.io/instance=my-new-helm-app" -o jsonpath="{.items[0].metadata.name}")
+  export CONTAINER_PORT=$(kubectl get pod --namespace default $POD_NAME -o jsonpath="{.spec.containers[0]
+.ports[0].containerPort}")
+  echo "Visit http://127.0.0.1:8080 to use your application"
+  kubectl --namespace default port-forward $POD_NAME 8080:$CONTAINER_PORT
+
+2025-06-29 18:47:47,630 - INFO - 
+--- Deployment 'my-new-helm-app-my-app-chart' Details (via Helm Release 'my-new-helm-app') ---
+2025-06-29 18:47:47,631 - INFO - Image: nginx:latest
+2025-06-29 18:47:47,631 - INFO - Namespace: default
+2025-06-29 18:47:47,631 - INFO - Replicas: 1
+2025-06-29 18:47:47,632 - INFO - Available Replicas: 1
+2025-06-29 18:47:47,632 - INFO - Endpoints: Internal Container Port: 80
+2025-06-29 18:47:47,632 - INFO -
+--- Scaling Configuration ---
+2025-06-29 18:47:47,633 - INFO - Min Replicas: 1
+2025-06-29 18:47:47,633 - INFO - Max Replicas: 10
+2025-06-29 18:47:47,633 - INFO - Scaling Metric Type: cpu
+2025-06-29 18:47:47,633 - INFO - Scaling Metric Value: 50
+2025-06-29 18:47:47,633 - INFO - Event Source Configuration: {}
+
+2025-06-29 18:47:47,634 - INFO - ------------------------------------------
+
+
+Deployment created successfully with the following details:
+deployment_name_in_k8s: my-new-helm-app-my-app-chart
+endpoints:
+- 'Internal Container Port: 80'
+helm_release_name: my-new-helm-app
+image: nginx:latest
+namespace: default
+scaling_config:
+  event_source: {}
+  max_replicas: 10
+  metric_type: cpu
+  metric_value: '50'
+  min_replicas: 1
+
+
