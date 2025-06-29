@@ -1,0 +1,4 @@
+kubernetes
+PyYAML
+click
+tabulate

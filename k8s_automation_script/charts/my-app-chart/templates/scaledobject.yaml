@@ -1,0 +1,31 @@
+{{- if .Values.kedaConfig.enabled }}
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: {{ include "my-app-chart.fullname" . }}-scaledobject
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "my-app-chart.labels" . | nindent 4 }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ include "my-app-chart.fullname" . }}
+  minReplicaCount: {{ .Values.kedaConfig.minReplicas }}
+  maxReplicaCount: {{ .Values.kedaConfig.maxReplicas }}
+  triggers:
+  - type: {{ .Values.kedaConfig.metricType }}
+    metadata:
+      {{- if .Values.kedaConfig.eventSourceConfig }}
+      {{- toYaml .Values.kedaConfig.eventSourceConfig | nindent 10 }}
+      {{- end }}
+      {{- if eq .Values.kedaConfig.metricType "cpu" }}
+      metricType: "Utilization"
+      {{- end }}
+      {{- if eq .Values.kedaConfig.metricType "memory" }}
+      metricType: "AverageValue"
+      {{- end }}
+      {{- if (and (or (eq .Values.kedaConfig.metricType "cpu") (eq .Values.kedaConfig.metricType "memory")) .Values.kedaConfig.metricValue) }}
+      value: "{{ .Values.kedaConfig.metricValue }}"
+      {{- end }}
+{{- end }}
